@@ -37,7 +37,7 @@ const userCtrl = {
 
             const activation_token = createActivationToken(newUser)
 
-            const url = `${CLIENT_URL}/user/activation/${activation_token}`
+            const url = `${CLIENT_URL}/user/activete/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
 
@@ -172,6 +172,19 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    updatefile: async (req, res) => {
+        try {
+            const {name, avatar , title } = req.body
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                name, avatar , title
+            })
+        
+            res.json({msg: " update Success !"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
 
     updateUsersRole: async (req, res) => {
         try {
