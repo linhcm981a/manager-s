@@ -40,7 +40,6 @@ const userCtrl = {
             const url = `${CLIENT_URL}/user/activate/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
-
             res.json({msg: "Register Success! Please activate your email to start."})
         } catch (err) {
             return res.status(500).json({msg: err.message})
