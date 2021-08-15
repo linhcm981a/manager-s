@@ -39,7 +39,7 @@ const userCtrl = {
            
             const activation_token = createActivationToken({newUser})
 
-            const url = `${CLIENT_URL}/user/activate/${activation_token}`
+            const url = `${process.env.CLIENT_URL}/User/activation/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
 
