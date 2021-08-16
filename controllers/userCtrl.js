@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const sendMail = require('./sendMail')
 
-
 const {google} = require('googleapis')
 const {OAuth2} = google.auth
 const fetch = require('node-fetch')
@@ -35,15 +34,13 @@ const userCtrl = {
                 name, email, password: passwordHash
             }
 
-          
-           
-            const activation_token = createActivationToken({newUser})
+            const activation_token = createActivationToken(newUser)
 
-            const url = `${process.env.CLIENT_URL}/User/activation/${activation_token}`
+            const url = `${CLIENT_URL}/user/activate/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
 
-            res.json({ msg: "Register Success! Please activate your email to start."})
+            res.json({msg: "Register Success! Please activate your email to start."})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
@@ -164,30 +161,16 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const {name, avatar , title } = req.body
+            const {name, avatar} = req.body
             await Users.findOneAndUpdate({_id: req.user.id}, {
-                name, avatar , title
+                name, avatar
             })
-        
-            res.json({msg: " update Success !"})
+
+            res.json({msg: "Update Success!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
-    updatefile: async (req, res) => {
-        try {
-            const {name, avatar , title } = req.body
-            await Users.findOneAndUpdate({_id: req.user.id}, {
-                name, avatar , title
-            })
-        
-            res.json({msg: " update Success !"})
-        } catch (err) {
-            return res.status(500).json({msg: err.message})
-        }
-    },
-
-
     updateUsersRole: async (req, res) => {
         try {
             const {role} = req.body

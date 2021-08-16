@@ -13,12 +13,6 @@ import EditUser from '../body/profile/EditUser'
 
 import Home from '../body/home/Home'
 
-import New from './detail/new'
-
-import NotFoundnew from '../utils/NotFound/NotFoundnew'
-
-
-
 import {useSelector} from 'react-redux'
 
 function Body() {
@@ -39,9 +33,6 @@ function Body() {
 
                 <Route path="/profile" component={isLogged ? Profile : NotFound} exact />
                 <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
-
-                <Route path="/new" component={isLogged ? New : NotFoundnew} exact />
-                
 
             </Switch>
         </section>
