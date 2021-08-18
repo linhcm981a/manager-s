@@ -12,7 +12,7 @@ const initialState = {
     cf_password: '',
     err: '',
     success: '',
-    title:''
+    
 }
 
 function Profile() {
@@ -23,7 +23,7 @@ function Profile() {
 
     const {user, isAdmin} = auth
     const [data, setData] = useState(initialState)
-    const {name, password, cf_password, err, success, title} = data
+    const {name, password, cf_password, err, success} = data
 
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -80,7 +80,7 @@ function Profile() {
             axios.patch('/user/update', {
                 name: name ? name : user.name,
                 avatar: avatar ? avatar : user.avatar,
-                title: title ? title : user.title
+               
             },{
                 headers: {Authorization: token}
             })
@@ -110,7 +110,7 @@ function Profile() {
     }
 
     const handleUpdate = () => {
-        if(name || avatar || title) updateInfor()
+        if(name || avatar ) updateInfor()
         if(password) updatePassword()
     }
 
@@ -175,11 +175,8 @@ function Profile() {
                     <input type="password" name="cf_password" id="cf_password"
                     placeholder="Confirm password" value={cf_password} onChange={handleChange} />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="cf_password">title</label>
-                    <input type="title" name="title" id="title"
-                    placeholder="title" value={title} onChange={handleChange} />
-                </div>
+              
+            
 
                 <div>
                     <em style={{color: "crimson"}}> 
@@ -201,7 +198,6 @@ function Profile() {
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Note</th>
                                 <th>Admin</th>
                                 <th>Action</th>
                             </tr>
@@ -213,7 +209,6 @@ function Profile() {
                                         <td>{user._id}</td>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
-                                        <td>{user.title}</td>
                                         <td>
                                             {
                                                 user.role === 1
