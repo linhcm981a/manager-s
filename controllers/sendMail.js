@@ -56,6 +56,8 @@ const sendEmail = (to, url, txt) => {
         `
     }
 
+
+        console.log("activate-email")
     smtpTransport.sendMail(mailOptions, (err, infor) => {
         if(err) return err;
         return infor
