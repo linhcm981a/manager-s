@@ -34,7 +34,7 @@ const userCtrl = {
                 name, email, password: passwordHash
             }
 
-            const activation_token = createActivationToken(newUser)
+            const activation_token = createActivationToken({newUser})
 
             const url = `${CLIENT_URL}/user/activate/${activation_token}`
             sendMail(email, url, "Verify your email address")
