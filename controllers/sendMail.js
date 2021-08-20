@@ -33,7 +33,7 @@ const sendEmail = (to, url, txt) => {
   console.log("activeta-send-email");
   return smtpTransport.sendMail(mailOptions, (err, response) => {
     console.log("SendEmail|Error>>", err);
-    console.log("SendEmail|Info>>", info);
+    console.log("SendEmail|Info>>", response);
     if (err) return err;
     return response;
   });
