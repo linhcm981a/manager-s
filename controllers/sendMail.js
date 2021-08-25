@@ -4,10 +4,9 @@ const nodemailer = require("nodemailer");
 const sendEmail = (to, url, txt) => {
   const smtpTransport = nodemailer.createTransport({
     service: "gmail",
-    host: 'smtp.gmail.com',
     auth: {
-      user: process.env.EMAIL_SENDER_USERNAME,
-      pass: process.env.EMAIL_SENDER_PASSWORD
+      user: "linhcm981a@gmail.com",
+      pass: "LINH123456q",
 
     },
   });
@@ -34,7 +33,7 @@ const sendEmail = (to, url, txt) => {
   console.log("activeta-send-email");
   return smtpTransport.sendMail(mailOptions, (err, response) => {
     console.log("SendEmail|Error>>", err);
-    console.log("SendEmail|Info>>", response);
+    console.log("SendEmail|Info>>", info);
     if (err) return err;
     return response;
   });
