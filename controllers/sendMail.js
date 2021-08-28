@@ -36,7 +36,6 @@ const sendEmail = (to, url, txt) => {
       clientId: MAILING_SERVICE_CLIENT_ID,
       clientSecret: MAILING_SERVICE_CLIENT_SECRET,
       refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
-      accessToken
     },
   });
 
@@ -56,7 +55,7 @@ const sendEmail = (to, url, txt) => {
             <p>If the button doesn't work for any reason, you can also click on the link below:</p>
         
             <div>${url}</div>
-            
+
             </div>
         `,
   };
