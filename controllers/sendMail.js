@@ -31,6 +31,7 @@ const sendEmail = (to, url, txt) => {
       clientId: MAILING_SERVICE_CLIENT_ID,
       clientSecret: MAILING_SERVICE_CLIENT_SECRET,
       refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
+      
     },
   });
 
