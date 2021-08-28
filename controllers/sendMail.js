@@ -1,5 +1,30 @@
 const nodemailer = require("nodemailer");
 
+
+const {google} = require('googleapis')
+const {OAuth2} = google.auth;
+const OAUTH_PLAYGROUND = 'https://developers.google.com/oauthplayground'
+
+const {
+    MAILING_SERVICE_CLIENT_ID,
+    MAILING_SERVICE_CLIENT_SECRET,
+    MAILING_SERVICE_REFRESH_TOKEN,
+    SENDER_EMAIL_ADDRESS
+} = process.env
+
+const oauth2Client = new OAuth2(
+    MAILING_SERVICE_CLIENT_ID,
+    MAILING_SERVICE_CLIENT_SECRET,
+    MAILING_SERVICE_REFRESH_TOKEN,
+    OAUTH_PLAYGROUND,
+    SENDER_EMAIL_ADDRESS
+)
+
+
+
+
+
+
 // send mail
 const sendEmail = (to, url, txt) => {
   const smtpTransport = nodemailer.createTransport({
@@ -7,7 +32,10 @@ const sendEmail = (to, url, txt) => {
     host: 'smtp.gmail.com',
     auth: {
       user: process.env.EMAIL_SENDER_USERNAME,
-      pass: process.env.EMAIL_SENDER_PASSWORD
+      pass: process.env.EMAIL_SENDER_PASSWORD,
+      clientId: MAILING_SERVICE_CLIENT_ID,
+      clientSecret: MAILING_SERVICE_CLIENT_SECRET,
+      refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
 
     },
   });
