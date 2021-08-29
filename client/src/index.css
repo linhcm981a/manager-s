@@ -42,3 +42,5 @@ button{
 /* ----------------- Profile ------------------- */
 @import url("./components/body/profile/profile.css");
 
+
+@import url("./components/assets/css/main.css");
