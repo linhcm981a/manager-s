@@ -40,7 +40,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
+      <Header />
         <Body />
       </div>
     </Router>

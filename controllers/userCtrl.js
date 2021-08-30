@@ -193,6 +193,8 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+
+
 //     googleLogin: async (req, res) => {
 //         try {
 //             const {tokenId} = req.body

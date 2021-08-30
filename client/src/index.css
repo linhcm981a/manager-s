@@ -14,7 +14,7 @@ code {
     monospace;
 }
 .App{
-  max-width: 1200px;
+ 
   width: 100%;
   min-height: 100vh;
   box-shadow: 0 0 20px #eee;
@@ -43,4 +43,3 @@ button{
 @import url("./components/body/profile/profile.css");
 
 
-@import url("./components/assets/css/main.css");
