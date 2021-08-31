@@ -161,9 +161,9 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const {name, avatar} = req.body
+            const {name, avatar ,title , description} = req.body
             await Users.findOneAndUpdate({_id: req.user.id}, {
-                name, avatar
+                name, avatar , title , description
             })
 
             res.json({msg: "Update Success!"})
@@ -194,6 +194,24 @@ const userCtrl = {
         }
     },
 
+
+    create: async (req, res) => {
+        try {
+    
+              const { title , description  } = req.body
+                  if(!title || !description )
+                  return res.status(400).json({msg : "Please fill in all fields "})
+             
+                const newCtrl = {
+                      title , description
+                }
+                  console.log(newCtrl)
+                res.json({ msg: "title succesfuly"})
+        } catch (err) {
+                return res.status(500).json({msg : err.message})
+        }
+      },
+      
 
 //     googleLogin: async (req, res) => {
 //         try {

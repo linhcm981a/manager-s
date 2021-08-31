@@ -1,79 +1,119 @@
+.profile_page1{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.profile_page1 .col-left1{
+  max-width: 400px;
+  min-width: 300px;
+  padding: 0 10px;
+  margin: auto;
+}
 
-::selection{
-  color: #fff;
-  background: #1cc7d0;
-}
-.wrapper{
-  height: 400px;
-  width: 320px;
-  position: relative;
-  transform-style: preserve-3d;
-	perspective: 1000px;
-}
-.wrapper .card{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  padding: 5px;
-  background: #fff;
-  border-radius: 10px;
-  transform: translateY(0deg);
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
-  transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
-}
-.wrapper:hover > .front-face{
-  transform: rotateY(-180deg);
-}
-.wrapper .card img{
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.wrapper .back-face{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-  transform: rotateY(180deg);
-}
-.wrapper:hover > .back-face{
-  transform: rotateY(0deg);
-}
-.wrapper .back-face img{
-  height: 150px;
+.profile_page1 .col-left1 .avatar1{
   width: 150px;
-  padding: 5px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  margin: 15px auto;
+  border: 1px solid #ddd;
   border-radius: 50%;
-  background: linear-gradient(375deg, #1cc7d0, #2ede98);
+  cursor: pointer;
 }
-.wrapper .back-face .info{
-  text-align: center;
-}
-.back-face .info .title{
-  font-size: 30px;
-  font-weight: 500;
-}
-.back-face ul{
-  display: flex;
-}
-.back-face ul a{
+.profile_page1 .col-left1 img{
+  width: 100%;
+  height: 100%;
   display: block;
-  height: 40px;
-  width: 40px;
-  color: #fff;
+  object-fit: cover;
+}
+
+.profile_page1 .col-left1 .avatar1 span{
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #fff8;
   text-align: center;
-  margin: 0 5px;
-  line-height: 38px;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  background: linear-gradient(375deg, #1cc7d0, #2ede98);
-  transition: all 0.5s ease;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: rgb(125, 118, 143);
+  transition: 0.3s ease-in-out;
 }
-.back-face ul a:hover{
-  color: #1cc7d0;
-  border-color: #1cc7d0;
-  background: linear-gradient(375deg, transparent, transparent);
+.profile_page1 .col-left1 .avatar1:hover span{
+  bottom: -15%;
 }
+.profile_page1 .col-left1 #file_up{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.profile_page1 .col-left1 h2{
+  text-align: center;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  color: rgb(57, 223, 107);
+  margin: 10px 0;
+}
+.profile_page1 .col-left1 label{
+  display: block;
+  margin-top: 5px;
+}
+.profile_page1 .col-left1 input{
+  width: 100%;
+  height: 40px;
+  margin: 5px 0;
+  border: none;
+  outline: none;
+  background: rgb(118, 177, 131);
+  padding: 0 5px;
+}
+.profile_page1 .col-left1 button{
+  background: rgb(182, 88, 88);
+  color: white;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin: 10px 0;
+}
+
+/* ----------- Col Right----------- */
+.profile_page1 .col-right1{
+  padding: 0 10px;
+  flex: 1;
+  min-width: 300px;
+}
+.profile_page1 .col-right1 h2{
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  color: rgb(78, 201, 150);
+  margin: 10px 0;
+}
+
+/* ------------ Table------------ */
+.customers1{
+  border-collapse: collapse;
+  width: 100%;
+}
+.customers1 td,
+.customers1 th{
+  border: 1px solid #ddd;
+  padding: 8px;
+  min-width: 100px;
+}
+.customers1 tr:nth-child(even){
+  background: #f2f2f2;
+}
+.customers1 th{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background: rgb(67, 159, 221);
+  color: white;
+}
+

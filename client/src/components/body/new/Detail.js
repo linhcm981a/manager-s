@@ -1,11 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {isLength, isMatch} from '../../utils/validation/Validation'
 import {showSuccessMsg, showErrMsg} from '../../utils/notification/Notification'
 import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
-import "./Detail.css";
 
 const initialState = {
     name: '',
@@ -13,7 +10,8 @@ const initialState = {
     cf_password: '',
     err: '',
     success: '',
-    
+    title: '',
+    description: '',
 }
 
 function Detail() {
@@ -24,11 +22,11 @@ function Detail() {
 
     const {user, isAdmin} = auth
     const [data, setData] = useState(initialState)
-    const {name, password, cf_password, err, success} = data
+    const {name, err, success, title , description} = data
 
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -81,7 +79,8 @@ function Detail() {
             axios.patch('/user/update', {
                 name: name ? name : user.name,
                 avatar: avatar ? avatar : user.avatar,
-               
+                title: title ? title : user.title,
+                description: description ? description : user.description,
             },{
                 headers: {Authorization: token}
             })
@@ -92,45 +91,9 @@ function Detail() {
         }
     }
 
-    const updatePassword = () => {
-        if(isLength(password))
-            return setData({...data, err: "Password must be at least 6 characters.", success: ''})
-
-        if(!isMatch(password, cf_password))
-            return setData({...data, err: "Password did not match.", success: ''})
-
-        try {
-            axios.post('/user/reset', {password},{
-                headers: {Authorization: token}
-            })
-
-            setData({...data, err: '' , success: "Updated Success!"})
-        } catch (err) {
-            setData({...data, err: err.response.data.msg , success: ''})
-        }
-    }
-
     const handleUpdate = () => {
-        if(name || avatar ) updateInfor()
-        if(password) updatePassword()
-    }
-
-    const handleDelete = async (id) => {
-        try {
-            if(user._id !== id){
-                if(window.confirm("Are you sure you want to delete this account?")){
-                    setLoading(true)
-                    await axios.delete(`/user/delete/${id}`, {
-                        headers: {Authorization: token}
-                    })
-                    setLoading(false)
-                    setCallback(!callback)
-                }
-            }
-            
-        } catch (err) {
-            setData({...data, err: err.response.data.msg , success: ''})
-        }
+        if(name || avatar || title || description) updateInfor()
+    
     }
 
     return (
@@ -140,25 +103,75 @@ function Detail() {
             {success && showSuccessMsg(success)}
             {loading && <h3>Loading.....</h3>}
         </div>
-           
-                <div className="wrapper">
-        <div className="card front-face">
-        <img src={avatar ? avatar : user.avatar} alt=""/>
+        <div className="profile_page1">
+            <div className="col-left1">
+                <h2>{isAdmin ? "Admin Profile": "User Profile"}</h2>
+
+                <div className="avatar1">
+                    <img src={avatar ? avatar : user.avatar} alt=""/>
+                    <span>
+                        <i className="fas fa-camera1"></i>
+                        <p>Change</p>
+                        <input type="file" name="file" id="file_up" onChange={changeAvatar} />
+                    </span>
+                </div>
+
+                <div className="form-group1">
+                    <label htmlFor="name">Name</label>
+                    <input type="text" name="name" id="name" defaultValue={user.name}
+                    placeholder="Your name" disabled />
+                </div>
+
+                <div className="form-group1">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name="email" id="email" defaultValue={user.email}
+                    placeholder="Your email address" disabled />
+                </div>
+                <div className="form-group1">
+                    <label htmlFor="title">Title</label>
+                    <input type="text" name="title" id="title" defaultValue={user.title}
+                    placeholder="Your title" onChange={handleChange} />
+                </div>
+                <div className="form-group1">
+                    <label htmlFor="description">Description</label>
+                    <input type="text" name="description" id="description" defaultValue={user.description}
+                    placeholder="Your description" onChange={handleChange} />
+                </div>
+              
+
+                <button disabled={loading} onClick={handleUpdate}>Update</button>
+            </div>
+
+            <div className="col-right1">
+                <h2>{isAdmin ? "Users" : "My Orders"}</h2>
+
+                <div style={{overflowX: "auto"}}>
+                    <table className="customers1">
+                        <thead>
+                            <tr>
+                         
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                users.map(user => (
+                                    <tr key={user._id}>
+                                      
+                                        <td>{user.name}</td>
+                                        <td>{user.title}</td>
+                                        <td>{user.description}</td>
+                                       
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div className="card back-face">
-        <img src={avatar ? avatar : user.avatar} alt=""/>
-          <div className="info">
-            <div className="title">CodingLab</div>
-            <p>User interface designer and <br />front-end developer</p>
-          </div>
-          <ul>
-            <a href="#"><i className="fab fa-facebook-f" /></a>
-            <a href="#"><i className="fab fa-twitter" /></a>
-            <a href="#"><i className="fab fa-instagram" /></a>
-            <a href="#"><i className="fab fa-youtube" /></a>
-          </ul>
-        </div>
-      </div>
         </>
     )
 }
