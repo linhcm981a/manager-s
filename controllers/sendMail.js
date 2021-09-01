@@ -42,6 +42,9 @@ const sendEmail = (to, url, txt) => {
       clientSecret: MAILING_SERVICE_CLIENT_SECRET,
       refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
     },
+    tls: {
+  rejectUnauthorized: false
+    }
   });
 
   const mailOptions = {
